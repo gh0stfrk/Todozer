@@ -1,0 +1,12 @@
+# Python Specific Stuff
+
+__pycache__/
+
+
+# Virtual Environment 
+
+venv/
+
+# Javascript 
+
+node_modules
