@@ -26,7 +26,7 @@ deleteButtons.forEach(button => {
   button.addEventListener("click", async () => {
     const itemId = button.getAttribute("item-id");
     try {
-      const response = await fetch(`/delete-todo/${itemId}`, {
+      const response = await fetch(`/delete_todo/${itemId}`, {
         method: "DELETE",
       });
       if (!response.ok) {

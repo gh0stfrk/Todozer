@@ -4,32 +4,45 @@
 {% load static %}
 <div class="mx-2 p-2">
     <div class="flex flex-wrap gap flex-col gap-2">
-        <div class="flex flex-wrap gap flex-col gap-2">
-            <div class="flex gap-1 flex-col gap-2 max-w-md">
-                <h1 class="text-2xl text-center">Pending</h1>
+
+        <div class="flex flex-wrap gap flex-row gap-2 justify-between">
+
+            <div class="flex flex-wrap flex-col gap-2 max-w-md w-56 bg-cyan-700 p-3 rounded-lg">
+                <h1 class="text-2xl text-center bg-white text-black rounded-lg">Pending</h1>
                 {% for obj in todos %}
                     <div class="flex gap-3 flex-col bg-blue-950 text-white p-2 rounded">               
                         <p class="font-bold text-xl">{{ obj.title }}</p>
                         <p>
                             {{ obj.description }}
                         </p>
-                        <button id="mark-complete" class="p-1 bg-slate-700 rounded" item-id="{{ obj.id }}">Mark Completed</button>
+                        <button id="mark-complete" class="p-1 bg-green-700 rounded" item-id="{{ obj.id }}">Mark Completed</button>
                     </div>
                 {% endfor %}
             </div>
-            <div class="flex flex-wrap gap flex-col gap-2 max-w-md">
-                <h1 class="text-2xl text-center">Completed</h1>
+
+            <div class="flex flex-wrap">
+                <form action="{% url 'add-todo' %}" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Add Task">
+                </form>
+            </div>
+
+            <div class="flex flex-wrap flex-col gap-2 max-w-md w-56 bg-teal-700 p-3 rounded-lg">
+                <h1 class="text-2xl text-center bg-white text-black rounded-lg">Completed</h1>
                 {% for obj in completed_todos %}
-                <div class="flex gap-3 flex-col bg-blue-950 text-white p-2 rounded">               
+                <div class="flex gap-3 flex-col bg-blue-950 text-white p-2 rounded-md">               
                     <p class="font-bold text-xl">{{ obj.title }}</p>
                     <p>
                         {{ obj.description }}
                     </p>
-                    <button id="delete-todo" class="p-1 bg-slate-700 rounded" item-id="{{ obj.id }}">Delete</button>
+                    <button id="delete-todo" class="p-1 bg-red-700 rounded" item-id="{{ obj.id }}">Delete</button>
                 </div>
                 {% endfor %}
             </div>
+
         </div>
+
     </div>
 </div>
 <script src="{% static 'js/todo.js' %}"></script>
